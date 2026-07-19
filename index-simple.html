@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Venkatesh Kuppala — Software Engineer</title>
+<style>
+  :root{
+    --ink: #1A1D23;
+    --muted: #5B6270;
+    --faint: #8A90A0;
+    --line: #E4E6EB;
+    --bg: #FFFFFF;
+    --bg-soft: #F7F8FA;
+    --accent: #2557D6;
+    --accent-soft: #EDF1FD;
+    --font-head: 'Georgia', 'Iowan Old Style', serif;
+    --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  }
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  body{
+    font-family:var(--font-body);
+    color:var(--ink);
+    background:var(--bg);
+    line-height:1.55;
+    font-size:16px;
+  }
+  a{ color:var(--accent); text-decoration:none; }
+  a:hover{ text-decoration:underline; }
+  img{ max-width:100%; display:block; }
+  :focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+
+  .wrap{ max-width:760px; margin:0 auto; padding:0 24px; }
+
+  /* ---- header / hero ---- */
+  header{
+    padding:56px 0 40px;
+    border-bottom:1px solid var(--line);
+  }
+  .top-row{
+    display:flex; align-items:center; gap:24px;
+    margin-bottom:28px;
+  }
+  .photo{
+    width:88px; height:88px; border-radius:50%;
+    overflow:hidden; flex-shrink:0;
+    border:1px solid var(--line);
+  }
+  .photo img{ width:100%; height:100%; object-fit:cover; }
+  h1{
+    font-family:var(--font-head);
+    font-size:30px;
+    font-weight:700;
+    line-height:1.15;
+  }
+  .role{
+    font-size:16px;
+    color:var(--muted);
+    margin-top:4px;
+  }
+  .loc{
+    font-size:13.5px;
+    color:var(--faint);
+    margin-top:4px;
+  }
+
+  .summary{
+    font-size:16px;
+    color:var(--ink);
+    max-width:640px;
+    margin-bottom:24px;
+  }
+
+  .contact-row{
+    display:flex; flex-wrap:wrap; gap:10px;
+  }
+  .contact-row a, .contact-row span{
+    font-size:13.5px;
+    padding:7px 13px;
+    border:1px solid var(--line);
+    border-radius:20px;
+    color:var(--ink);
+    white-space:nowrap;
+  }
+  .contact-row a:hover{ border-color:var(--accent); color:var(--accent); text-decoration:none; }
+  .contact-row .btn-primary{
+    background:var(--accent);
+    color:#fff;
+    border-color:var(--accent);
+    font-weight:600;
+  }
+  .contact-row .btn-primary:hover{ background:#1c47b8; color:#fff; }
+
+  /* ---- stat strip ---- */
+  .stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    border-bottom:1px solid var(--line);
+  }
+  .stat{
+    padding:22px 20px;
+    border-right:1px solid var(--line);
+    text-align:center;
+  }
+  .stat:last-child{ border-right:none; }
+  .stat .num{
+    font-family:var(--font-head);
+    font-size:24px;
+    font-weight:700;
+    color:var(--accent);
+  }
+  .stat .lbl{
+    font-size:11.5px;
+    color:var(--faint);
+    text-transform:uppercase;
+    letter-spacing:.04em;
+    margin-top:4px;
+  }
+  @media (max-width:560px){
+    .stats{ grid-template-columns:repeat(2,1fr); }
+    .stat{ border-bottom:1px solid var(--line); }
+    .stat:nth-child(2n){ border-right:none; }
+  }
+
+  /* ---- sections ---- */
+  section{ padding:40px 0; border-bottom:1px solid var(--line); }
+  section:last-of-type{ border-bottom:none; }
+
+  h2{
+    font-family:var(--font-head);
+    font-size:20px;
+    font-weight:700;
+    margin-bottom:20px;
+  }
+
+  /* experience */
+  .job{ margin-bottom:26px; }
+  .job:last-child{ margin-bottom:0; }
+  .job-top{
+    display:flex; justify-content:space-between; align-items:baseline;
+    gap:12px; flex-wrap:wrap;
+  }
+  .job-title{ font-weight:700; font-size:16px; }
+  .job-date{ font-size:13px; color:var(--faint); white-space:nowrap; }
+  .job-org{ font-size:14px; color:var(--muted); margin-top:2px; margin-bottom:8px; }
+  .job ul{ padding-left:20px; }
+  .job li{ font-size:14.5px; color:var(--ink); margin-bottom:5px; }
+
+  /* projects */
+  .proj{ margin-bottom:22px; }
+  .proj:last-child{ margin-bottom:0; }
+  .proj-top{
+    display:flex; justify-content:space-between; align-items:baseline;
+    gap:12px; flex-wrap:wrap;
+  }
+  .proj-title{ font-weight:700; font-size:15.5px; }
+  .proj-date{ font-size:12.5px; color:var(--faint); white-space:nowrap; }
+  .proj-desc{ font-size:14.5px; color:var(--muted); margin-top:4px; margin-bottom:8px; }
+  .proj-stack{ display:flex; flex-wrap:wrap; gap:6px; }
+  .tag{
+    font-size:11.5px;
+    background:var(--bg-soft);
+    color:var(--muted);
+    padding:3px 9px;
+    border-radius:5px;
+    border:1px solid var(--line);
+  }
+
+  /* skills */
+  .skill-groups{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px 32px;
+  }
+  @media (max-width:560px){ .skill-groups{ grid-template-columns:1fr; } }
+  .skill-group-title{
+    font-size:12px;
+    font-weight:700;
+    color:var(--faint);
+    text-transform:uppercase;
+    letter-spacing:.04em;
+    margin-bottom:8px;
+  }
+  .skill-list{ font-size:14.5px; color:var(--ink); }
+
+  /* certs + education */
+  .cert-row{
+    display:flex; justify-content:space-between; align-items:baseline;
+    padding:10px 0; border-bottom:1px solid var(--line);
+    gap:12px; flex-wrap:wrap;
+  }
+  .cert-row:last-child{ border-bottom:none; }
+  .cert-name{ font-weight:600; font-size:14.5px; }
+  .cert-issuer{ font-size:13px; color:var(--muted); }
+  .cert-date{ font-size:12.5px; color:var(--faint); white-space:nowrap; }
+
+  .edu-block{ margin-top:24px; padding-top:24px; border-top:1px solid var(--line); }
+  .edu-school{ font-weight:700; font-size:15.5px; }
+  .edu-degree{ font-size:14px; color:var(--muted); margin-top:3px; }
+  .edu-gpa{ font-size:13.5px; color:var(--accent); margin-top:6px; font-weight:600; }
+  .langs{ margin-top:14px; font-size:13.5px; color:var(--muted); }
+
+  /* footer */
+  footer{ padding:36px 0 56px; text-align:center; }
+  footer .foot-links{ display:flex; justify-content:center; gap:16px; flex-wrap:wrap; margin-bottom:14px; }
+  footer .note{ font-size:12.5px; color:var(--faint); }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header>
+    <div class="top-row">
+      <div class="photo"><img src="venkatesh-photo.jpg" alt="Venkatesh Kuppala"></div>
+      <div>
+        <h1>Venkatesh Kuppala</h1>
+        <div class="role">Software Engineer — Data &amp; Full-Stack Development</div>
+        <div class="loc">Badvel, Andhra Pradesh, India</div>
+      </div>
+    </div>
+
+    <p class="summary">
+      Final-year CSE student at SVCE (GPA 8.89) with 3 internships across data analytics,
+      system administration, and Python-based data science. Proficient in Python, SQL,
+      React.js, and Node.js, with hands-on full-stack and data visualization project experience.
+      Certified by Infosys, MongoDB, and Deloitte.
+    </p>
+
+    <div class="contact-row">
+      <a class="btn-primary" href="mailto:kuppalavenkatesh2924@gmail.com">Email me</a>
+      <a href="tel:+918639499086">+91 86394 99086</a>
+      <a href="https://linkedin.com/in/venkateshkuppala" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/KuppalaVenkatesh2924" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </header>
+
+  <div class="stats">
+    <div class="stat"><div class="num">8.89</div><div class="lbl">GPA / 10</div></div>
+    <div class="stat"><div class="num">3</div><div class="lbl">Internships</div></div>
+    <div class="stat"><div class="num">~40%</div><div class="lbl">Reporting cut</div></div>
+    <div class="stat"><div class="num">3</div><div class="lbl">Certifications</div></div>
+  </div>
+
+  <section id="experience">
+    <h2>Work Experience</h2>
+
+    <div class="job">
+      <div class="job-top">
+        <div class="job-title">Data Analytics Intern</div>
+        <div class="job-date">Jan 2026 – Mar 2026</div>
+      </div>
+      <div class="job-org">ApexPlanet Software Pvt. Ltd · Virtual Internship</div>
+      <ul>
+        <li>Cleaned and analyzed business datasets using Python and SQL, building automated dashboards that cut manual reporting by ~40%.</li>
+        <li>Generated trend reports and data visualizations to support data-driven decision-making across business functions.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-top">
+        <div class="job-title">System Administrator Intern</div>
+        <div class="job-date">Oct 2025 – Nov 2025</div>
+      </div>
+      <div class="job-org">ServiceNow · Virtual Internship</div>
+      <ul>
+        <li>Administered the ServiceNow ITSM platform, configuring workflows, user roles, and access controls via scripting.</li>
+        <li>Earned Certified System Administrator recognition with hands-on exposure to incident, problem, and change management.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-top">
+        <div class="job-title">Python for Data Science Intern</div>
+        <div class="job-date">Aug 2025 – Oct 2025</div>
+      </div>
+      <div class="job-org">AISECT · Virtual Internship</div>
+      <ul>
+        <li>Analyzed real-world datasets using Pandas, Matplotlib, and NumPy, producing insight dashboards for stakeholders.</li>
+        <li>Designed and queried relational databases for structured data handling and automated report generation.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+
+    <div class="proj">
+      <div class="proj-top">
+        <div class="proj-title">College Admission ChatBot</div>
+        <div class="proj-date">Sep 2025</div>
+      </div>
+      <div class="proj-desc">Conversational bot that collects student details and auto-generates filled PDF admission forms, reducing manual entry for staff.</div>
+      <div class="proj-stack"><span class="tag">Python</span><span class="tag">ReportLab</span></div>
+    </div>
+
+    <div class="proj">
+      <div class="proj-top">
+        <div class="proj-title">Fee Payment Receipt System</div>
+        <div class="proj-date">Jun – Jul 2025</div>
+      </div>
+      <div class="proj-desc">Accepts student fee input, generates a unique transaction ID, and auto-saves a formatted PDF for streamlined record-keeping.</div>
+      <div class="proj-stack"><span class="tag">Python</span><span class="tag">UUID</span><span class="tag">PDF</span></div>
+    </div>
+
+    <div class="proj">
+      <div class="proj-top">
+        <div class="proj-title">E-Commerce Website</div>
+        <div class="proj-date">Jul – Oct 2025</div>
+      </div>
+      <div class="proj-desc">Full-stack e-commerce platform with product catalogue, cart, JWT authentication, and admin dashboard for order management.</div>
+      <div class="proj-stack"><span class="tag">React.js</span><span class="tag">Node.js</span><span class="tag">MySQL</span><span class="tag">JWT</span></div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2>Core Skills</h2>
+    <div class="skill-groups">
+      <div>
+        <div class="skill-group-title">Languages</div>
+        <div class="skill-list">Python, Java, C, SQL, JavaScript</div>
+      </div>
+      <div>
+        <div class="skill-group-title">Web &amp; Frameworks</div>
+        <div class="skill-list">React.js, Node.js, HTML5, CSS3</div>
+      </div>
+      <div>
+        <div class="skill-group-title">Databases</div>
+        <div class="skill-list">MySQL, MongoDB</div>
+      </div>
+      <div>
+        <div class="skill-group-title">Tools &amp; Platforms</div>
+        <div class="skill-list">Git, ServiceNow, Microsoft Excel, VS Code, Cloud Computing</div>
+      </div>
+      <div>
+        <div class="skill-group-title">Data &amp; AI</div>
+        <div class="skill-list">Data Analysis, Data Visualization, Pandas, NumPy, Artificial Intelligence</div>
+      </div>
+      <div>
+        <div class="skill-group-title">Concepts</div>
+        <div class="skill-list">Data Structures, DBMS, ITSM, OOP</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="certs-education">
+    <h2>Certifications</h2>
+    <div class="cert-row">
+      <div>
+        <div class="cert-name">Python Programming</div>
+        <div class="cert-issuer">Infosys Springboard</div>
+      </div>
+      <div class="cert-date">Jul 2025</div>
+    </div>
+    <div class="cert-row">
+      <div>
+        <div class="cert-name">SQL &amp; NoSQL (MongoDB)</div>
+        <div class="cert-issuer">MongoDB University</div>
+      </div>
+      <div class="cert-date">Jun 2025</div>
+    </div>
+    <div class="cert-row">
+      <div>
+        <div class="cert-name">Data Analytics</div>
+        <div class="cert-issuer">Deloitte</div>
+      </div>
+      <div class="cert-date">Jun 2025</div>
+    </div>
+
+    <div class="edu-block">
+      <div class="edu-school">Sri Venkateswara College of Engineering</div>
+      <div class="edu-degree">B.Tech, Computer Science and Engineering · Sep 2023 – Present</div>
+      <div class="edu-gpa">GPA: 8.89 / 10</div>
+      <div class="langs">Languages: English (Fluent), Telugu (Fluent), Hindi (Intermediate)</div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="foot-links">
+      <a href="mailto:kuppalavenkatesh2924@gmail.com">kuppalavenkatesh2924@gmail.com</a>
+      <a href="https://linkedin.com/in/venkateshkuppala" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/KuppalaVenkatesh2924" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <div class="note">© 2026 Venkatesh Kuppala</div>
+  </footer>
+
+</div>
+
+</body>
+</html>
